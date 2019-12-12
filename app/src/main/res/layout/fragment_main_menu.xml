@@ -1,0 +1,48 @@
+<LinearLayout android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:id="@+id/MenuTitle"
+            android:text="Tower Defence"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/btnStartGame"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Start Game"/>
+
+        <Button
+            android:id="@+id/btnHowToPlay"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="How To Play"/>
+
+        <Button
+            android:id="@+id/btnHighScores"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="High Scores"/>
+
+    </LinearLayout>
+
+</LinearLayout>
