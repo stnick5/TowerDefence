@@ -1,14 +1,16 @@
 package com.nick.towerdefence.Model;
 
+import android.widget.LinearLayout;
+
 public class Level {
 
-    private int numOfRows;
-    private int numOfColumns;
-    private float cellSize;
-    private Cell[][] levelGrid = new Cell[numOfColumns][numOfRows];
+    private Cell gameCell, controlPanelCell;
 
-    public Level (int width, int height, boolean[][] path, int baseHP, int levelNum)
+    public Level (LinearLayout game, LinearLayout controls)
     {
+        // Set the positions and sizes of the game and control panel cells.
+        gameCell = new Cell(game.getX(), game.getY(), game.getWidth(), game.getHeight());
+        controlPanelCell = new Cell(controls.getX(), controls.getY(), controls.getWidth(), controls.getHeight());
 
     }
 
