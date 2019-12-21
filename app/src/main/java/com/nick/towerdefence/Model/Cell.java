@@ -1,33 +1,37 @@
 package com.nick.towerdefence.Model;
 
-public class Cell {
-    private float x, y, width, height;
+import android.graphics.RectF;
 
-    public Cell(float x, float y, float w, float h)
+import static com.nick.towerdefence.Model.CellNames.*;
+
+public class Cell {
+
+    private RectF bounds;
+    private CellNames CellType;
+
+    public Cell(RectF b, CellNames type)
     {
-        this.x = x;
-        this.y = y;
-        this.width = w;
-        this.height = h;
+        this.bounds = b;
+        this.CellType = type;
     }
 
     public float getX()
     {
-        return this.x;
+        return this.bounds.left;
     }
 
     public float getY()
     {
-        return this.y;
+        return this.bounds.top;
     }
 
     public float getWidth()
     {
-        return this.width;
+        return this.bounds.right;
     }
 
     public float getHeight()
     {
-        return this.height;
+        return this.bounds.bottom;
     }
 }
