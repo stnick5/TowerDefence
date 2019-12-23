@@ -35,10 +35,26 @@ public class Cell extends View {
     @Override
     protected void onDraw(Canvas canvas)
     {
-        if (this.isActive)
-            canvas.drawColor(Color.RED);
-        else
-            canvas.drawColor(Color.GRAY);
+        switch(this.CellType)
+        {
+            case GRIDCELL: {
+                canvas.drawColor(Color.LTGRAY);
+                break;
+            }
+            case WALL: {
+                canvas.drawColor(Color.YELLOW);
+                break;
+            }
+            case PATH: {
+                canvas.drawColor(Color.CYAN);
+                break;
+            }
+        }
+    }
+
+    public void setCellType(CellNames t)
+    {
+        this.CellType = t;
     }
 
     public boolean getActive()

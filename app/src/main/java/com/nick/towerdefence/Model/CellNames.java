@@ -1,6 +1,7 @@
 package com.nick.towerdefence.Model;
 
 public enum CellNames {
+    WALL, PATH,
     GAMEGRID, CONTROL,
     GRIDCELL,
     PURCHASEBTURRETCELL, PURCHASEMTURRETCELL, PURCHASEATURRETCELL,
