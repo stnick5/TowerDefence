@@ -2,6 +2,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:gravity="center"
+    android:id="@+id/GameFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -9,14 +10,18 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:orientation="vertical"
+        android:clickable="true"
         android:id="@+id/GameDisplayView">
 
-        <TextView
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Game Grid"
-            android:textSize="30dp"
-            android:gravity="center"/>
+            android:rowCount="16"
+            android:columnCount="10"
+            android:background="@android:color/background_light"
+            android:id="@+id/gameGridLayout">
+        </GridLayout>
+    <!-- rows 16, columns 10 -->
 
     </LinearLayout>
 
@@ -25,6 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:clickable="true"
         android:id="@+id/GameControlPanel">
 
         <TextView

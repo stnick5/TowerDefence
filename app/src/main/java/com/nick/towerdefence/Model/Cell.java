@@ -1,37 +1,53 @@
 package com.nick.towerdefence.Model;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.RectF;
+import android.view.View;
 
-import static com.nick.towerdefence.Model.CellNames.*;
+//import static com.nick.towerdefence.Model.CellNames.*;
 
-public class Cell {
+public class Cell extends View {
 
     private RectF bounds;
     private CellNames CellType;
+    private int dX, dY;
 
-    public Cell(RectF b, CellNames type)
+    private boolean isActive;
+
+    public Cell(Context context, RectF b, CellNames type)
     {
+        super(context);
         this.bounds = b;
         this.CellType = type;
     }
 
-    public float getX()
+    public Cell(Context context, CellNames type, int x, int y)
     {
-        return this.bounds.left;
+        super(context);
+        this.CellType = type;
+        this.dX = x;
+        this.dY = y;
+        this.isActive = false;
     }
 
-    public float getY()
+    @Override
+    protected void onDraw(Canvas canvas)
     {
-        return this.bounds.top;
+        if (this.isActive)
+            canvas.drawColor(Color.RED);
+        else
+            canvas.drawColor(Color.GRAY);
     }
 
-    public float getWidth()
+    public boolean getActive()
     {
-        return this.bounds.right;
+        return this.isActive;
     }
 
-    public float getHeight()
+    public void setActive(boolean a)
     {
-        return this.bounds.bottom;
+        this.isActive = a;
     }
 }
