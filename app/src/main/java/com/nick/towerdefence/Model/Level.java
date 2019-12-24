@@ -1,32 +1,40 @@
 package com.nick.towerdefence.Model;
 
+import android.content.Context;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 
 import com.nick.towerdefence.R;
 
 public class Level {
 
-    private GridLayout gameGridLayout;
+
     private Cell[][] gameCells;
     private int numOfRows, numOfColumns;
 
     private Cell gameCell, controlPanelCell;
 
 
-    public Level (View view, RectF game, RectF controls)
+    // Entities
+    private Entity entity;
+
+    public Level (View v, RectF game, RectF controls)
     {
+        final View view = v;
+
         // Set the positions and sizes of the game and control panel cells.
         this.gameCell = new Cell(view.getContext(), game, CellNames.GAMEGRID);
         this.controlPanelCell = new Cell(view.getContext(), controls, CellNames.CONTROL);
 
         // Get the game grid from the XML file and get the number of rows and columns.
-        this.gameGridLayout = view.findViewById(R.id.gameGridLayout);
-        this.numOfRows = this.gameGridLayout.getRowCount();
-        this.numOfColumns = this.gameGridLayout.getColumnCount();
+        final GridLayout gameGridLayout = view.findViewById(R.id.gameGridLayout);
+        this.numOfRows = gameGridLayout.getRowCount();
+        this.numOfColumns = gameGridLayout.getColumnCount();
 
         // Create game grid.
         this.gameCells = new Cell[this.numOfRows][this.numOfColumns];
@@ -40,11 +48,14 @@ public class Level {
             }
         }
 
+
         // Calculate cell size and position, and apply them to the grid.
-        this.gameGridLayout.getViewTreeObserver().addOnGlobalLayoutListener(
+        final ViewTreeObserver gridObserver = gameGridLayout.getViewTreeObserver();
+        gridObserver.addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
+
                         final int MARGIN = 2;
                         int pWidth = gameGridLayout.getWidth();
                         int pHeight = gameGridLayout.getHeight();
@@ -64,14 +75,32 @@ public class Level {
                                 gameCells[y][x].setLayoutParams(params);
                             }
                         }
+
+                        setPath();
+                        createEntities(view);
+
+                        gameGridLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                     }
                 });
-
-        // Set default path
-        setPath();
     }
 
-    private void setPath()
+    public void createEntities(View v)
+    {
+        GridLayout gameGridLayout = v.findViewById(R.id.gameGridLayout);
+
+        // Get cell width and height
+        int width = gameGridLayout.getWidth() / this.numOfColumns;
+        int height = gameGridLayout.getHeight() / this.numOfRows;
+
+
+        int centerX = (0*width) + (width/2);
+        int centerY = (3*height) + (height/2);
+
+        this.entity = new Entity(v.getContext(), centerX, centerY);
+        gameGridLayout.addView(this.entity);
+    }
+
+    public void setPath()
     {
         this.gameCells[0][2].setCellType(CellNames.WALL);
         this.gameCells[1][2].setCellType(CellNames.WALL);

@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.graphics.RectF;
 import android.view.View;
 
+import com.nick.towerdefence.View.Renderer;
+
 //import static com.nick.towerdefence.Model.CellNames.*;
 
-public class Cell extends View {
+public class Cell extends Renderer {
 
     private RectF bounds;
     private CellNames CellType;
@@ -35,21 +37,22 @@ public class Cell extends View {
     @Override
     protected void onDraw(Canvas canvas)
     {
-        switch(this.CellType)
-        {
-            case GRIDCELL: {
-                canvas.drawColor(Color.LTGRAY);
-                break;
-            }
-            case WALL: {
-                canvas.drawColor(Color.YELLOW);
-                break;
-            }
-            case PATH: {
-                canvas.drawColor(Color.CYAN);
-                break;
-            }
-        }
+        //super.onDraw(canvas);
+        //switch(this.CellType)
+        //{
+        //    case GRIDCELL: {
+        //        canvas.drawColor(Color.LTGRAY);
+        //        break;
+        //    }
+        //    case WALL: {
+        //        canvas.drawColor(Color.YELLOW);
+        //        break;
+        //    }
+        //    case PATH: {
+        //        canvas.drawColor(Color.WHITE);
+        //        break;
+        //    }
+        //}
     }
 
     public void setCellType(CellNames t)

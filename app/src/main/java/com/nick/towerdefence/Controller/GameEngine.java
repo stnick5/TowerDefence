@@ -13,10 +13,12 @@ import com.nick.towerdefence.R;
 public class GameEngine extends View implements View.OnTouchListener{
 
     private Level level;
+    private Context context;
 
     public GameEngine(Context context)
     {
         super(context);
+        this.context = context;
 
         // Sets the view to the game fragment.
         View view = ((Activity)context).getWindow().getDecorView().findViewById(R.id.GameFragment);
@@ -26,7 +28,7 @@ public class GameEngine extends View implements View.OnTouchListener{
         LinearLayout controlLayout = view.findViewById(R.id.GameControlPanel);
 
         // Set the Touch Listeners for both layouts.
-        gameLayout.setOnTouchListener(this);
+        //gameLayout.setOnTouchListener(this);
         controlLayout.setOnTouchListener(this);
 
         float width = view.findViewById(R.id.GameDisplayView).getWidth();
@@ -43,6 +45,7 @@ public class GameEngine extends View implements View.OnTouchListener{
         RectF controlRect = new RectF(cpx, cpy, cpWidth, cpHeight);
 
         level = new Level(view, gameRect, controlRect);
+
     }
 
     @Override
