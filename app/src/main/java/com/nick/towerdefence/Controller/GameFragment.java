@@ -16,32 +16,40 @@ import com.nick.towerdefence.R;
  */
 public class GameFragment extends Fragment {
 
+   // private Activity gameActivity;
+    private View gameView;
     private GameEngine engine;
 
     public GameFragment() {
-        // Required empty public constructor
+        // Constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game, container, false);
+        this.gameView = inflater.inflate(R.layout.fragment_game, container, false);
+        return this.gameView;
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
 
-        View view = getView();
-        engine = new GameEngine(this.getContext());
+        this.engine = new GameEngine(this.gameView);
+    }
 
-        view.post(new Runnable() {
-            @Override
-            public void run() {
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.engine.pause();
+    }
 
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.engine.resume();
     }
 }

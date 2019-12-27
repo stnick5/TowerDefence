@@ -12,6 +12,9 @@ import com.nick.towerdefence.R;
 
 public class GameActivity extends AppCompatActivity {
 
+    // Create a new fragment
+    private Fragment fragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,19 +24,16 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int buttonNumber = intent.getIntExtra("buttonNumber", -1);
 
-        // Create new fragment
-        Fragment fragment = null;
-
         switch(buttonNumber)
         {
             case 1:
-                fragment = new GameFragment();
+                this.fragment = new GameFragment();
                 break;
             case 2:
-                fragment = new HowToPlayFragment();
+                this.fragment = new HowToPlayFragment();
                 break;
             case 3:
-                fragment = new HighScoresFragment();
+                this.fragment = new HighScoresFragment();
                 break;
         }
 
@@ -41,4 +41,18 @@ public class GameActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = manager.beginTransaction().add(R.id.game_activity_fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    protected void onPause() {
+        this.fragment.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        this.fragment.onResume();
+        super.onResume();
+    }
+
+
 }
